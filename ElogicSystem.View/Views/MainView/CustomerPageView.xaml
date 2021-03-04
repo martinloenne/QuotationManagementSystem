@@ -1,0 +1,58 @@
+﻿<Page x:Class="ElogicSystem.View.CustomerPageView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ElogicSystem.View"
+      xmlns:ViewModels="clr-namespace:ElogicSystem.ViewModel;assembly=ElogicSystem.ViewModel"
+      mc:Ignorable="d" 
+      d:DataContext="{d:DesignInstance ViewModels:CustomerPageViewModel}"
+      d:DesignHeight="450" d:DesignWidth="1000"
+      Title="CustomerView">
+  <Page.Resources>
+    <local:BoolToTemplateVisibilityConverter x:Key="BoolToTemplateVisibilityConverter" />
+    <local:BoolToTemplateVisibilityInvertedConverter x:Key="BoolToTemplateVisibilityInvertedConverter" />
+  </Page.Resources>
+  <Grid Background="White">
+    <Grid>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="auto" />
+      </Grid.ColumnDefinitions>
+
+      <Grid Grid.Column="0">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="*" />
+          <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <DataGrid Grid.RowSpan="2" HeadersVisibility="Column" AlternatingRowBackground="#E8E8E8" AlternationCount="2"
+                            ItemsSource="{Binding CustomersToShow}" SelectedItem="{Binding SelectedCustomer}" AutoGenerateColumns="False">
+          <DataGrid.Columns>
+            <DataGridTextColumn Header="Name" Binding="{Binding CustomerInfo.Name, Mode=TwoWay}" Width="*" />
+            <DataGridTextColumn Header="Phone Number" Binding="{Binding CustomerInfo.PhoneNumber, Mode=TwoWay}" Width="*" />
+            <DataGridTextColumn Header="Email" Binding="{Binding CustomerInfo.Email, Mode=TwoWay}" Width="*" />
+            <DataGridTextColumn Header="Shipping Address" Binding="{Binding CustomerInfo.ShippingAddress, Mode=TwoWay}" Width="*" />
+            <DataGridTextColumn Header="Shipping Zipcode" Binding="{Binding CustomerInfo.ShippingZipCode, Mode=TwoWay}" Width="*" />
+            <DataGridTextColumn Header="Billing Address" Binding="{Binding CustomerInfo.BillingAddress, Mode=TwoWay}" Width="*" />
+            <DataGridTextColumn Header="Billing Zipcode" Binding="{Binding CustomerInfo.BillingZipCode, Mode=TwoWay}" Width="*" />
+          </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Button "+" to add a new Customer. -->
+        <Button Grid.Row="1" x:Name="AddCustomer" Content="+" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5"
+                          ToolTip="Add customer"
+                          Command="{Binding CreateNewCustomerCommand}" />
+      </Grid>
+
+      <StackPanel Grid.Column="1">
+        <Button Content="Configure Customer" Command="{Binding ConfigureCustomerCommand}" Padding="5" Margin="5 0 0 0" />
+        <Button Content="Delete Customer" Command="{Binding DeleteCustomerCommand}" Padding="5" Margin="5 5 0 0" />
+        <Button Content="Activate Customer" Command="{Binding ActivateCustomerCommand}" Visibility="{Binding ShowDeactivatedCustomers, Converter={StaticResource BoolToTemplateVisibilityInvertedConverter}}" Padding="5" Margin="5 5 0 0" />
+        <Button Content="Deactivate Customer" Command="{Binding DeactivateCustomerCommand}" Visibility="{Binding ShowDeactivatedCustomers, Converter={StaticResource BoolToTemplateVisibilityConverter}}"  Padding="5" Margin="5 5 0 0" /> 
+        <Button Content="Show Active Customers" Command="{Binding ShowActivedCustomersCommand}" Visibility="{Binding ShowDeactivatedCustomers, Converter={StaticResource BoolToTemplateVisibilityInvertedConverter}}" Padding="5" Margin="5 5 0 0" />
+        <Button Content="Show Deactivate Customers" Command="{Binding ShowDeactivedCustomersCommand}" Visibility="{Binding ShowDeactivatedCustomers, Converter={StaticResource BoolToTemplateVisibilityConverter}}" Padding="5" Margin="5 5 0 0" />
+      </StackPanel>
+    </Grid>
+  </Grid>
+</Page>

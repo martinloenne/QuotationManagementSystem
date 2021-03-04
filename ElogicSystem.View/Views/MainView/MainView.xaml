@@ -1,0 +1,255 @@
+﻿<Window x:Class="ElogicSystem.View.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:ElogicSystem.View"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized"
+        Title="Elogic Quotation Management" Height="700" Width="1200">
+
+  <!-- Main border. -->
+  <Border Padding="10">
+
+    <!-- Main grid. -->
+    <Grid>
+
+      <!-- Main grid row setup. -->
+      <Grid.RowDefinitions>
+        <RowDefinition Height="auto" />
+        <RowDefinition Height="*" />
+      </Grid.RowDefinitions>
+
+      <!-- Top bar grid. -->
+      <Grid Grid.Row="0" Height="50">
+
+        <!-- Top bar grid column setup. -->
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="auto" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Has to become drop down menu -->
+        <Button Grid.Column="0" Content="Filter" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+          <TextBox Width="300" Style="{StaticResource TextBoxWithBorder}"></TextBox>
+        </StackPanel>
+      </Grid>
+
+      <!-- Tab Control and Buttons grid.-->
+      <Grid Grid.Row="1">
+
+        <!-- Tab Control grid. -->
+        <Grid Grid.Column="0">
+
+          <!-- Grid row setup. -->
+          <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+          </Grid.RowDefinitions>
+
+          <!-- Content of the tab. -->
+          <TabControl Grid.Row="0" x:Name="QuotationOverview" Margin="0 5 5 5" SelectedIndex="{Binding SelectedTabIndex}" BorderThickness="0">
+
+            <!-- Tab Item for the Quotations View. -->
+            <TabItem Header="Quotations" BorderThickness="0">
+              <Frame Content="{Binding QuotationPage}" NavigationUIVisibility="Hidden" />
+            </TabItem>
+
+            <!-- Tab Item for the Customers View. -->
+            <TabItem Header="Customers">
+              <Frame Content="{Binding CustomerPage}" NavigationUIVisibility="Hidden" />
+            </TabItem>
+
+            <!-- Tab Item for the Items View. -->
+            <TabItem Header="Items">
+              <Frame Content="{Binding ItemPage}" NavigationUIVisibility="Hidden" />
+            </TabItem>
+          </TabControl>
+        </Grid>
+
+        <!-- Buttons -->
+        <!--
+        <StackPanel Grid.Column="1" Margin="0 28 0 0">
+          <Button x:Name="Print" Content="Print" Margin="0 0 5 5" Padding="5" IsEnabled="True" Command="{Binding PrintQuotationCommand}" />
+          <Button x:Name="Configure" Content="Configure" Margin="0 0 5 5" Padding="5" Command="{Binding EditSelectedItemCommand}" />
+          <Button x:Name="DeleteItem" Content="Delete Item" Margin="0 0 5 5" Padding="5" Command="{Binding DeleteCommand}" />
+        </StackPanel>
+      </Grid>
+      -->
+        <!-- Details and Price -->
+        <!--
+
+      <Grid Grid.Row="2">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="100" />
+        </Grid.ColumnDefinitions>
+
+        -->
+        <!--Details-->
+        <!--
+        <Grid Grid.Column="0">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+          </Grid.RowDefinitions>
+
+          -->
+        <!-- DataGrid to show details of selected quotations. -->
+        <!--
+          <DataGrid Grid.RowSpan="2" HeadersVisibility="Column" AlternatingRowBackground="#E8E8E8" AlternationCount="2" Margin="0 5 5 5"
+                  ItemsSource="{Binding QuotationDataSelectedItem.Panels}" SelectedItem="{Binding SelectedPanel}" />
+
+          -->
+        <!-- Button "+" to add a new Panel. -->
+        <!--
+          <Button Grid.Row="1" x:Name="AddNewPanel" Content="+" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10"
+                  ToolTip="Add panel"
+                  Command="{Binding AddNewPanelCommand}" />
+        </Grid>
+
+        -->
+        <!-- Buttons, right lower. -->
+        <!--
+        <StackPanel Grid.Column="1">
+
+          -->
+        <!-- Button "Edit Panel". -->
+        <!--
+          <Button x:Name="EditPanel" Content="Edit Panel" Command="{Binding EditPanelCommand}" Margin="0 5 5 0" Padding="5" />
+
+          -->
+        <!-- Button "Delete Panel". -->
+        <!--<Button x:Name="Delete" Content="Delete Panel" Command="{Binding DeletePanelCommand}" Margin="0 5 5 0" Padding="5" />
+        </StackPanel>-->
+      </Grid>
+    </Grid>
+    <!-- End of Main grid. -->
+  </Border>
+</Window>
+
+
+<!-- Main grid row setup. --><!--
+<Grid.RowDefinitions>
+  <RowDefinition Height="auto" />
+  <RowDefinition Height="*" />
+  <RowDefinition Height="*" />
+</Grid.RowDefinitions>
+
+--><!-- Top bar grid. --><!--
+<Grid Grid.Row="0" Height="50">
+
+  --><!-- Top bar grid column setup. --><!--
+  <Grid.ColumnDefinitions>
+    <ColumnDefinition Width="auto" />
+    <ColumnDefinition Width="*" />
+  </Grid.ColumnDefinitions>
+
+  --><!-- Has to become drop down menu --><!--
+  <Button Grid.Column="0" Content="Filter" />
+  <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+    <TextBox Width="300"></TextBox>
+  </StackPanel>
+</Grid>
+
+--><!-- Tab Control and Buttons grid.--><!--
+<Grid Grid.Row="1">
+
+  --><!-- Grid column setup.--><!--
+  <Grid.ColumnDefinitions>
+    <ColumnDefinition Width="*" />
+    <ColumnDefinition Width="100" />
+  </Grid.ColumnDefinitions>
+
+  --><!-- Tab Control grid. --><!--
+  <Grid Grid.Column="0">
+
+    --><!-- Grid row setup. --><!--
+    <Grid.RowDefinitions>
+      <RowDefinition Height="*" />
+      <RowDefinition Height="auto" />
+    </Grid.RowDefinitions>
+
+    --><!-- Content of the tab. --><!--
+    <TabControl Grid.Row="0" x:Name="QuotationOverview" Margin="0 5 5 5" SelectedIndex="{Binding SelectedTabIndex}">
+
+      --><!-- Tab Item for the Quotations View. --><!--
+      <TabItem Header="Quotations">
+
+        --><!-- Quotations View grid. --><!--
+        <Grid>
+
+          --><!-- Grid row setup. --><!--
+          <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+          </Grid.RowDefinitions>
+
+          --><!-- DataGrid to show Quotations. --><!--
+          <DataGrid x:Name="QuotationDataGrid" Grid.RowSpan="2" IsReadOnly="True" HeadersVisibility="Column" AlternatingRowBackground="#E8E8E8" AlternationCount="2"
+                          ItemsSource="{Binding QuotationData, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedDataItem}" />
+
+          --><!-- Button "+" to add a new Quotation. --><!--
+          <Button Grid.Row="1" x:Name="AddQuotaton" Content="+" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5"
+                        ToolTip="Add quotation"
+                        Command="{Binding AddNewQuotationCommand}" />
+        </Grid>
+        --><!-- End of quotations grid. --><!--
+      </TabItem>
+
+      --><!-- Tab Item for the Customers View. --><!--
+      <TabItem Header="Customers">
+
+        --><!-- Customers View grid. --><!--
+        <Grid>
+
+          --><!-- Grid row setup. --><!--
+          <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+          </Grid.RowDefinitions>
+
+          --><!-- DataGrid to show Customers. --><!--
+          <DataGrid Grid.RowSpan="2" IsReadOnly="True" HeadersVisibility="Column" AlternatingRowBackground="#E8E8E8" AlternationCount="2"
+                          ItemsSource="{Binding CustomerData}" SelectedItem="{Binding SelectedDataItem}" SelectedIndex="{Binding SelectedItemIndex}" />
+
+          --><!-- Button "+" to add a new Customer. --><!--
+          <Button Grid.Row="1" x:Name="AddCustomer" Content="+" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5"
+                        ToolTip="Add customer"
+                        Command="{Binding AddNewCustomerCommand}" />
+        </Grid>
+        --><!-- End of Customers View grid. --><!--
+      </TabItem>
+
+      --><!-- Tab Item for the Items View. --><!--
+      <TabItem Header="Items">
+        <Grid>
+
+          <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+          </Grid.RowDefinitions>
+
+          --><!-- DataGrid to show Items --><!--
+          <DataGrid Grid.RowSpan="2" IsReadOnly="True" HeadersVisibility="Column" AlternatingRowBackground="#E8E8E8" AlternationCount="2"
+                        ItemsSource="{Binding ItemsData}" SelectedItem="{Binding Path=SelectedDataItem}" SelectedIndex="{Binding SelectedItemIndex}" />
+
+          --><!-- Button "+" to add a new Item --><!--
+          <Button Grid.Row="1" x:Name="AddItem" Content="+" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5"
+                        ToolTip="Add item"
+                        Command="{Binding }" />
+        </Grid>
+      </TabItem>
+    </TabControl>
+  </Grid>
+
+  --><!-- Buttons --><!--
+  <StackPanel Grid.Column="1" Margin="0 28 0 0">
+    <Button x:Name="Print" Content="Print" Margin="0 0 5 5" Padding="5" IsEnabled="True" Command="{Binding PrintQuotationCommand}" />
+    <Button x:Name="Configure" Content="Configure" Margin="0 0 5 5" Padding="5" Command="{Binding EditSelectedItemCommand}" />
+    <Button x:Name="DeleteItem" Content="Delete Item" Margin="0 0 5 5" Padding="5" Command="{Binding DeleteCommand}" />
+  </StackPanel>
+</Grid>-->

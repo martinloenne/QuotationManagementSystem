@@ -1,0 +1,48 @@
+﻿<Window x:Class="ElogicSystem.View.CreateItemView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ElogicSystem.View"
+        xmlns:ViewModels="clr-namespace:ElogicSystem.ViewModel;assembly=ElogicSystem.ViewModel"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance ViewModels:CreateItemViewModel}"
+        WindowStartupLocation="CenterScreen"
+        Title="ChooseTypeOfItemView" Height="300" Width="500">
+  <Window.Resources>
+    <!-- Converter definitions. -->
+    <local:BoolToTemplateVisibilityConverter x:Key="BoolToTemplateVisibilityConverter" />
+    <local:BoolToPanelColumnIndexConverter x:Key="BoolToPanelColumnIndexConverter" />
+    <local:BoolToPanelColumnSpanConverter x:Key="BoolToPanelColumnSpanConverter" />
+    <local:BoolToTemplateVisibilityInvertedConverter x:Key="BoolToTemplateVisibilityInvertedConverter" />
+  </Window.Resources>
+  <Grid Margin="10">
+    <StackPanel>
+      <ComboBox x:Name="ComboBoxTypes" SelectedIndex="{Binding SelectedTypeIndex}" VerticalAlignment="Center" HorizontalAlignment="Left" Width="100">
+        <ComboBoxItem Content="Product" />
+        <ComboBoxItem Content="Module" />
+        <ComboBoxItem Content="Block" />
+      </ComboBox>
+      <Grid x:Name="CreateProduct" Visibility="{Binding CreateProductVisible, Converter={StaticResource BoolToTemplateVisibilityConverter}}">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0">
+          <TextBlock Text="ID" />
+          <TextBlock Text="Description" />
+          <TextBlock Text="Price" />
+          <TextBlock Text="Time" />
+        </StackPanel>
+        <StackPanel Grid.Column="1">
+          <TextBox Text="{Binding NewProduct.ID}" Style="{StaticResource TextBoxWithBorder}" />
+          <TextBox Text="{Binding NewProduct.Description}" Style="{StaticResource TextBoxWithBorder}" />
+          <TextBox Text="{Binding NewProduct.Price}" Style="{StaticResource TextBoxWithBorder}" />
+          <TextBox Text="{Binding NewProduct.Time}" Style="{StaticResource TextBoxWithBorder}" />
+        </StackPanel>
+      </Grid>
+    </StackPanel>
+    <Button Content="Save item" Command="{Binding SaveItemCommand}" VerticalAlignment="Bottom" HorizontalAlignment="Right" />
+  </Grid>
+
+</Window>

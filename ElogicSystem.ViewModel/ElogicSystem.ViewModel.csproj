@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\PropertyChanged.Fody.3.1.3\build\PropertyChanged.Fody.props" Condition="Exists('..\packages\PropertyChanged.Fody.3.1.3\build\PropertyChanged.Fody.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{900E8223-10D1-4CE0-B130-50BDE4A1BEE9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ElogicSystem.ViewModel</RootNamespace>
+    <AssemblyName>ElogicSystem.ViewModel</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="PropertyChanged, Version=3.1.3.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
+      <HintPath>..\packages\PropertyChanged.Fody.3.1.3\lib\net40\PropertyChanged.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsBase.4.6.1055.0\lib\WindowsBase.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseClasses\BaseNotify.cs" />
+    <Compile Include="BaseClasses\BaseViewModel.cs" />
+    <Compile Include="Helpers\CollectionToObservableConverter.cs" />
+    <Compile Include="Helpers\QuantifiableObjectHandler.cs" />
+    <Compile Include="ModelWrappers\Customer\CustomerInfoViewModel.cs" />
+    <Compile Include="ModelWrappers\Customer\CustomerViewModel.cs" />
+    <Compile Include="ModelWrappers\Items\BlockViewModel.cs" />
+    <Compile Include="ModelWrappers\Items\ContainerViewModel.cs" />
+    <Compile Include="ModelWrappers\Items\ModuleViewModel.cs" />
+    <Compile Include="ModelWrappers\Quotation\QuotationStatusViewModel.cs" />
+    <Compile Include="ModelWrappers\Quotation\QuotationViewModel.cs" />
+    <Compile Include="PageServices\IPageFactory.cs" />
+    <Compile Include="PageServices\IPageService.cs" />
+    <Compile Include="PageServices\PageType.cs" />
+    <Compile Include="ViewModels\CreateItemViewModel.cs" />
+    <Compile Include="ViewModels\CustomerPageViewModel.cs" />
+    <Compile Include="ViewModels\ItemPageViewModel.cs" />
+    <Compile Include="ViewModels\PrintQuotationViewModel.cs" />
+    <Compile Include="ViewModels\QuotationPageViewModel.cs" />
+    <Compile Include="WindowServices\IWindowFactory.cs" />
+    <Compile Include="WindowServices\IPrintableWindowService.cs" />
+    <Compile Include="WindowServices\IWindowService.cs" />
+    <Compile Include="ModelWrappers\Items\ItemViewModel.cs" />
+    <Compile Include="ModelWrappers\PanelViewModel.cs" />
+    <Compile Include="ModelWrappers\Items\ProductViewModel.cs" />
+    <Compile Include="ModelWrappers\TemplateViewModel.cs" />
+    <Compile Include="Helpers\Validate.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\ConfigureQuotationViewModel.cs" />
+    <Compile Include="ViewModels\ConfigureCustomerViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Helpers\RelayCommand.cs" />
+    <Compile Include="ViewModels\PanelBuilderViewModel.cs" />
+    <Compile Include="WindowServices\WindowType.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ElogicSystem.Helper\ElogicSystem.Helper.csproj">
+      <Project>{3ea51497-cfca-4663-83ef-3f09c6fd6d7b}</Project>
+      <Name>ElogicSystem.Helper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ElogicSystem.Model\ElogicSystem.Model.csproj">
+      <Project>{95cd4e2e-827e-432f-8048-25628d86fcb3}</Project>
+      <Name>ElogicSystem.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Fody.6.0.0\build\Fody.targets" Condition="Exists('..\packages\Fody.6.0.0\build\Fody.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Fody.6.0.0\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.6.0.0\build\Fody.targets'))" />
+    <Error Condition="!Exists('..\packages\PropertyChanged.Fody.3.1.3\build\PropertyChanged.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\PropertyChanged.Fody.3.1.3\build\PropertyChanged.Fody.props'))" />
+  </Target>
+</Project>
