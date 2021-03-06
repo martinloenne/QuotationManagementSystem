@@ -1,13 +1,26 @@
-# ElogicSystem
+# Quotation Managament System
 
-Hello world! 
+This project focuses on creating a tool to assist
+the company X in the production of
+quotations for circuit breaker panels. 
 
-In this project we will build a quotation management system for the company Elogic. 
+The company X already has such a system but the
+system possesses significant shortcomings in its
+functionalities. Through a correspondence with
+X and an extensive analysis of the problem
+and application domain, the system requirements
+are decided, both in regards to improvements
+on the existing system as well as additional
+functionalities for the new system. 
 
-// The Group. 
+One of the major focus points during the project is
+the analysis and design of the system. 
 
-### GitFlow
+The project was produced using an iterative process, and the
+program was developed using the structural design
+pattern MVVM. 
 
-![Alt text](/GitFlowMethod.png)
-
-
+The program includes an administrative tool for generating quotations as
+well as a database for structuring and maintaining
+the components involved in creating a circuit
+breaker panel.
