@@ -24,3 +24,13 @@ The program includes an administrative tool for generating quotations as
 well as a database for structuring and maintaining
 the components involved in creating a circuit
 breaker panel.
+
+
+## Authors
+
+- Adil Cemalovic
+- Christian Damsgaard
+- Magnus Lund
+- Martin Lønne
+- Simon Holst
+- Søren Hjorth Boelskifte
