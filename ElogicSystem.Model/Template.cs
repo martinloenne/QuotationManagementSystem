@@ -10,20 +10,16 @@ namespace ElogicSystem.Model {
   /// <summary>
   /// Contains information about a template and provides methods to manipulate the template.
   /// </summary>
-  public class Template {
+  public class Template : IRelationItemsOwner {
     // PROPERTIES
 
-    public int ID { get; set; }
+    public int ID { get; private set; }
     public string Description { get; set; }
 
-    public List<IQuantifiable<Item>> Items { get; private set; }
+    public virtual List<TemplateItem> TemplateItems { get; set; }
 
-    // CONSTRUCTOR
-
-    public Template(int id, string description) {
-      ID = id;
-      Description = description;
-      Items = new List<IQuantifiable<Item>>();
+    public Template() {
+      TemplateItems = new List<TemplateItem>();
     }
   }
 }

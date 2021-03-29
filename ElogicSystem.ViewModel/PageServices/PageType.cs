@@ -5,7 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ElogicSystem.ViewModel {
+
   public enum PageType {
-    QuotationPageView, CustomerPageView, ItemPageView
+    QuotationPageView,
+    CustomerPageView,
+    ItemPageView,
+    TemplatePageView
   }
 }

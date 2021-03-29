@@ -7,15 +7,19 @@ using System.Windows.Controls;
 using ElogicSystem.ViewModel;
 
 namespace ElogicSystem.View {
+
   public class PageService : IPageService {
     private Page _page;
+
+    private IDisposableViewModel _viewModel;
 
     public PageService(Page page) {
       _page = page;
     }
 
-    public void SetDataContext(BaseViewModel viewModel) {
-      _page.DataContext = viewModel;
+    public void SetDataContext(IDisposableViewModel viewModel) {
+      _viewModel = viewModel;
+      _page.DataContext = _viewModel;
     }
   }
 }

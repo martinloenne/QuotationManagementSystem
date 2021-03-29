@@ -8,22 +8,22 @@ using System.Threading.Tasks;
 namespace ElogicSystem.ViewModel {
 
   public class QuotationStatusViewModel : BaseNotify {
-    private QuotationStatus _quotationStatusModel;
+    public QuotationStatus QuotationStatusModel { get; private set; }
 
     public DateTime Date {
-      get { return _quotationStatusModel.Date; }
+      get { return QuotationStatusModel.Date; }
     }
 
     public QuotationStatusType Type {
-      get { return _quotationStatusModel.Type; }
+      get { return QuotationStatusModel.Type; }
     }
 
     public string Employee {
-      get { return _quotationStatusModel.Employee; }
+      get { return QuotationStatusModel.EmployeeName; }
     }
 
     public QuotationStatusViewModel(QuotationStatus quotationStatusModel) {
-      _quotationStatusModel = quotationStatusModel;
+      QuotationStatusModel = quotationStatusModel;
     }
   }
 }

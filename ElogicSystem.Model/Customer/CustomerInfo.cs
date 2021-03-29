@@ -19,23 +19,5 @@ namespace ElogicSystem.Model {
 
     public string BillingAddress { get; set; }
     public string BillingZipCode { get; set; }
-
-    public CustomerInfo(string name,
-                        string phoneNumber,
-                        string email,
-                        string shippingAddress,
-                        string shippingZipCode,
-                        string billingAddress,
-                        string billingZipCode) {
-      Name = name;
-      PhoneNumber = phoneNumber;
-      Email = email;
-
-      ShippingAddress = shippingAddress;
-      ShippingZipCode = shippingZipCode;
-
-      BillingAddress = billingAddress;
-      BillingZipCode = billingZipCode;
-    }
   }
 }

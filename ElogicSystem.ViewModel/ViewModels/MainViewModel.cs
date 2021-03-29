@@ -6,85 +6,82 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using ElogicSystem.DataAccess;
 
 namespace ElogicSystem.ViewModel {
 
-  /// <summary>
-  /// The main view model of the system which manages literally everything.
-  /// </summary>
   public class MainViewModel : BaseViewModel {
-
-    // Observable collection of quotations
-    private ObservableCollection<QuotationViewModel> _quotationData;
-
-    // Observable collection of customers
-    private ObservableCollection<CustomerViewModel> _customerData;
-
-    // Observable collection of items
-    private ObservableCollection<ItemViewModel> _itemData;
+    public object QuotationPage { get; set; }
+    public object CustomerPage { get; set; }
+    public object ItemPage { get; set; }
+    public object TemplatePage { get; set; }
+    public int SelectedTabIndex { set { SetNewTabContext(value); } }
 
     private IWindowFactory _windowFactory;
 
     private IPageFactory _pageFactory;
 
-    // Properties
+    private IPageService _quotationPageService;
+    private IPageService _customerPageService;
+    private IPageService _itemsPageService;
+    private IPageService _templatePageService;
 
-    /// <summary>
-    /// Read Only Collection of quotations
-    /// </summary>
-    public ReadOnlyObservableCollection<QuotationViewModel> QuotationData { get; set; }
+    private IDisposableViewModel _currentViewModelTab;
 
-    /// <summary>
-    /// Read Only Collection of customers
-    /// </summary>
-    public ReadOnlyObservableCollection<CustomerViewModel> CustomerData { get; set; }
-
-    /// <summary>
-    /// Read Only Collection of the items
-    /// </summary>
-    public ReadOnlyObservableCollection<ItemViewModel> ItemData { get; set; }
-
-
-    public object QuotationPage { get; set; }
-    public object CustomerPage { get; set; }
-    public object ItemPage { get; set; }
-
-    /// <summary>
-    /// Which of the 3 collections that is selected at time.
-    /// </summary>
-    public int SelectedTabIndex { get; set; }
-
-    // Constructor
     public MainViewModel(Action onClose, IWindowFactory windowFactory, IPageFactory pageFactory) : base(onClose) {
-      SelectedTabIndex = 0;
+      // Deletes existing database and seeds it with predefined data
+      DataSeeder dataSeeder = new DataSeeder();
+      dataSeeder.SeedAll();
+
       // Window services.
       _windowFactory = windowFactory;
       _pageFactory = pageFactory;
 
-      // Private members
-      _quotationData = new ObservableCollection<QuotationViewModel>();
-      _customerData = new ObservableCollection<CustomerViewModel>();
-      _itemData = new ObservableCollection<ItemViewModel>();
-
-      // Public properties
-      QuotationData = new ReadOnlyObservableCollection<QuotationViewModel>(_quotationData);
-      CustomerData = new ReadOnlyObservableCollection<CustomerViewModel>(_customerData);
-      ItemData = new ReadOnlyObservableCollection<ItemViewModel>(_itemData);
-
-      // Setup quotation page view 
+      // Setup quotation page view
       QuotationPage = _pageFactory.GetNewPageInstanceAsObject(PageType.QuotationPageView);
-      IPageService pageService = _pageFactory.GetPageService(QuotationPage);
-      pageService.SetDataContext(new QuotationPageViewModel(this.OnClose, _quotationData, _customerData, _itemData, _windowFactory));
+      _quotationPageService = _pageFactory.GetPageService(QuotationPage);
 
-      // Setup customer page view 
+      // Setup customer page view
       CustomerPage = _pageFactory.GetNewPageInstanceAsObject(PageType.CustomerPageView);
-      pageService = _pageFactory.GetPageService(CustomerPage);
-      pageService.SetDataContext(new CustomerPageViewModel(this.OnClose, _windowFactory, _customerData));
+      _customerPageService = _pageFactory.GetPageService(CustomerPage);
 
-      // Setup item page view 
+      // Setup item page view
       ItemPage = _pageFactory.GetNewPageInstanceAsObject(PageType.ItemPageView);
-      pageService = _pageFactory.GetPageService(ItemPage);
-      pageService.SetDataContext(new ItemPageViewModel(this.OnClose, _windowFactory, _itemData));
+      _itemsPageService = _pageFactory.GetPageService(ItemPage);
+
+      // Setup template page view
+      TemplatePage = _pageFactory.GetNewPageInstanceAsObject(PageType.TemplatePageView);
+      _templatePageService = _pageFactory.GetPageService(TemplatePage);
+
+      SelectedTabIndex = 0;
+    }
+
+    private void SetNewTabContext(int value) {
+      _currentViewModelTab?.SaveAndDispose();
+      switch(value) {
+        case 0:
+          _currentViewModelTab = new QuotationPageViewModel(this.OnClose, _windowFactory);
+          _quotationPageService.SetDataContext(_currentViewModelTab);
+          break;
+
+        case 1:
+          _currentViewModelTab = new CustomerPageViewModel(this.OnClose, _windowFactory);
+          _customerPageService.SetDataContext(_currentViewModelTab);
+          break;
+
+        case 2:
+          _currentViewModelTab = new ItemPageViewModel(this.OnClose, _windowFactory);
+          _itemsPageService.SetDataContext(_currentViewModelTab);
+          break;
+
+        case 3:
+          _currentViewModelTab = new TemplatePageViewModel(this.OnClose, _windowFactory);
+          _templatePageService.SetDataContext(_currentViewModelTab);
+          break;
+
+        default:
+          break;
+      }
     }
   }
 }

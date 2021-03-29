@@ -11,10 +11,5 @@ namespace ElogicSystem.Model {
   /// and <see cref="Module"/>.
   /// </summary>
   public class Block : Container {
-    // CONSTRUCTOR
-
-    public Block(int id, string description, double quantity, double price, double time, Category category) :
-      base(id, description, quantity, price, time, category) {
-    }
   }
 }

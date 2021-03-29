@@ -1,4 +1,5 @@
-﻿using ElogicSystem.Model;
+﻿using ElogicSystem.DataAccess;
+using ElogicSystem.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,60 +9,40 @@ using System.Threading.Tasks;
 
 namespace ElogicSystem.ViewModel {
 
-  public class TemplateViewModel : BaseNotify {
-
-    #region Private fields
-
-    private readonly Template _templateModel;
-
-    private ObservableCollection<ItemViewModel> _itemViewModels;
-
-    #endregion Private fields
-
-    #region Properties
+  public class TemplateViewModel : BaseNotify, IBillOfMaterial {
+    public Template TemplateModel { get; set; }
 
     public int ID {
-      get { return _templateModel.ID; }
-      set { _templateModel.ID = value; }
+      get { return TemplateModel.ID; }
     }
 
-    public ReadOnlyObservableCollection<ItemViewModel> ItemViewModels { get; private set; }
+    public string Description {
+      get { return TemplateModel.Description; }
+      set { TemplateModel.Description = value; }
+    }
 
-    #endregion Properties
-
-    #region Constructor
+    public ObservableCollection<ItemViewModel> ItemViewModels { get; private set; }
+    public double Price { get; set; }
+    public double Time { get; set; }
 
     public TemplateViewModel(Template templateModel) {
-      _templateModel = templateModel;
+      TemplateModel = templateModel;
 
-      _itemViewModels = new ObservableCollection<ItemViewModel>(templateModel.Items.Select(i => new ItemViewModel((Item)i)));
-
-      ItemViewModels = new ReadOnlyObservableCollection<ItemViewModel>(_itemViewModels);
+      ItemViewModels = new ObservableCollection<ItemViewModel>(templateModel.TemplateItems.Select(i => ItemViewModelFactory.GetItemViewModel(i)));
     }
 
-    #endregion Constructor
-
-    #region Methods
-
-    public void AddItem(Item item) => AddItem(item, 1);
-
-    public void AddItem(Item item, double quantity) {
-      QuantifiableObjectHandler<Item, ItemViewModel>.Add(_templateModel.Items,
-                                                         _itemViewModels,
-                                                         item,
-                                                         new ItemViewModel(item),
-                                                         quantity);
+    public void Add(ItemViewModel itemViewModel) {
+      TemplateItem templateItem = new TemplateItem(TemplateModel, itemViewModel.ItemModel);
+      TemplateModel.TemplateItems.Add(templateItem);
+      ItemViewModels.Add(ItemViewModelFactory.GetItemViewModel(templateItem));
     }
 
-    public void RemoveItem(Item item) => RemoveItem(item, 1);
-
-    public void RemoveItem(Item item, double quantity) {
-      QuantifiableObjectHandler<Item, ItemViewModel>.Remove(_templateModel.Items,
-                                                            _itemViewModels,
-                                                            item,
-                                                            quantity);
+    public void Remove(int index) {
+      TemplateModel.TemplateItems.RemoveAt(index);
+      ItemViewModels.RemoveAt(index);
     }
 
-    #endregion Methods
+    public void CalculateInfo() {
+    }
   }
 }

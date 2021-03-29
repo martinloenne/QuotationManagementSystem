@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,48 +8,64 @@ using ElogicSystem.Model;
 
 namespace ElogicSystem.ViewModel {
 
-  public class CustomerInfoViewModel : BaseNotify {
-    private CustomerInfo _customerInfoModel;
+  public class CustomerInfoViewModel : BaseNotify, IDataErrorInfo {
+    public CustomerInfo CustomerInfoModel { get; }
 
     public string Name {
-      get { return _customerInfoModel.Name; }
-      set { _customerInfoModel.Name = value; }
+      get { return CustomerInfoModel.Name; }
+      set { CustomerInfoModel.Name = value; }
     }
 
     public string PhoneNumber {
-      get { return _customerInfoModel.PhoneNumber; }
-      set { _customerInfoModel.PhoneNumber = value; }
+      get { return CustomerInfoModel.PhoneNumber; }
+      set { CustomerInfoModel.PhoneNumber = value; }
     }
 
     public string Email {
-      get { return _customerInfoModel.Email; }
-      set { _customerInfoModel.Email = value; }
+      get { return CustomerInfoModel.Email; }
+      set { CustomerInfoModel.Email = value; }
     }
 
     public string ShippingAddress {
-      get { return _customerInfoModel.ShippingAddress; }
-      set { _customerInfoModel.ShippingAddress = value; }
+      get { return CustomerInfoModel.ShippingAddress; }
+      set { CustomerInfoModel.ShippingAddress = value; }
     }
 
     public string ShippingZipCode {
-      get { return _customerInfoModel.ShippingZipCode; }
-      set { _customerInfoModel.ShippingZipCode = value; }
+      get { return CustomerInfoModel.ShippingZipCode; }
+      set { CustomerInfoModel.ShippingZipCode = value; }
     }
 
     public string BillingAddress {
-      get { return _customerInfoModel.BillingAddress; }
-      set { _customerInfoModel.BillingAddress = value; }
+      get { return CustomerInfoModel.BillingAddress; }
+      set { CustomerInfoModel.BillingAddress = value; }
     }
 
     public string BillingZipCode {
-      get { return _customerInfoModel.BillingZipCode; }
-      set { _customerInfoModel.BillingZipCode = value; }
+      get { return CustomerInfoModel.BillingZipCode; }
+      set { CustomerInfoModel.BillingZipCode = value; }
     }
 
-    public CustomerInfoViewModel() : this(new CustomerInfo("", "", "", "", "", "", "")) { }
-
     public CustomerInfoViewModel(CustomerInfo customerInfoModel) {
-      _customerInfoModel = customerInfoModel;
+      CustomerInfoModel = customerInfoModel;
+    }
+
+    public string Error { get; set; }
+
+    public string this[string propertyName] {
+      get {
+        switch (propertyName) {
+          case nameof(Email):
+            if (!string.IsNullOrEmpty(Email) && !Validate.Email(Email)) {
+              return "Email should contain an @-sign.";
+            }
+            else {
+              return null;
+            }
+          default:
+            throw new Exception("Property not found.");
+        }
+      }
     }
   }
 }

@@ -12,10 +12,8 @@ namespace ElogicSystem.View {
   /// <summary>
   /// Represents a service class implementing <see cref="IWindowService"/> that is able to open and close windows.
   /// </summary>
-  internal class WindowService : IWindowService {
+  public class WindowService : IWindowService {
     private Window _window;
-
-    #region Methods
 
     /// <summary>
     /// Instantiates a new <see cref="WindowService"/> using the specified window as its internal window
@@ -24,7 +22,6 @@ namespace ElogicSystem.View {
     /// <param name="window">The internal window.</param>
     public WindowService(Window window) {
       _window = window;
-      
     }
 
     /// <summary>
@@ -51,7 +48,5 @@ namespace ElogicSystem.View {
     public void Close() {
       _window.Close();
     }
-
-    #endregion Methods
   }
 }

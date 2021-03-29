@@ -28,21 +28,5 @@ namespace ElogicSystem.ViewModel {
     public static bool Email(string email) {
       return email.ToLower().Contains('@');
     }
-
-    /// <summary>
-    /// Validates wheter the phone number contains digits????
-    /// </summary>
-    /// <param name="phoneNumber">The phone number to be validated.</param>
-    /// <returns></returns>
-    public static bool PhoneNumber(string phoneNumber) {
-      throw new NotImplementedException();
-      return true;
-    }
-
-    // Is it possible to validate this??? Do all countries have numbers in their zip code... ??
-    public static bool ZipCode(string zipCode) {
-      throw new NotImplementedException();
-      return true;
-    }
   }
 }

@@ -1,0 +1,75 @@
+﻿<Window x:Class="ElogicSystem.View.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:ElogicSystem.View"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized"
+        Title="Elogic Quotation Management" Height="700" Width="1200">
+
+    <!-- Main border. -->
+    <Border Padding="10">
+
+        <!-- Main grid. -->
+        <Grid>
+
+            <!-- Main grid row setup. -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!-- Top bar grid. -->
+            <Grid Grid.Row="0" Height="50">
+
+                <!-- Top bar grid column setup. -->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+            </Grid>
+
+            <!-- Tab Control and Buttons grid.-->
+            <Grid Grid.Row="1">
+
+                <!-- Tab Control grid. -->
+                <Grid Grid.Column="0">
+
+                    <!-- Grid row setup. -->
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+
+                    <!-- Content of the tab. -->
+                    <TabControl Grid.Row="0" x:Name="QuotationOverview" Margin="0 5 5 5" SelectedIndex="{Binding SelectedTabIndex, Mode=OneWayToSource}" BorderThickness="0">
+
+                        <!-- Tab Item for the Quotations View. -->
+                        <TabItem Header="Quotations" BorderThickness="0">
+                            <Frame Content="{Binding QuotationPage}" NavigationUIVisibility="Hidden" />
+                        </TabItem>
+
+                        <!-- Tab Item for the Customers View. -->
+                        <TabItem Header="Customers">
+                            <Frame Content="{Binding CustomerPage}" NavigationUIVisibility="Hidden" />
+                        </TabItem>
+
+                        <!-- Tab Item for the Items View. -->
+                        <TabItem Header="Items">
+                            <Frame Content="{Binding ItemPage}" NavigationUIVisibility="Hidden" />
+                        </TabItem>
+
+                        <!-- Tab Item for the Templates View. -->
+                        <TabItem Header="Templates">
+                            <Frame Content="{Binding TemplatePage}" NavigationUIVisibility="Hidden" />
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </Grid>
+        </Grid>
+        <!-- End of Main grid. -->
+    </Border>
+</Window>

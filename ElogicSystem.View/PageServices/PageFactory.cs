@@ -18,6 +18,9 @@ namespace ElogicSystem.View {
         case PageType.ItemPageView:
           return new ItemPageView();
 
+        case PageType.TemplatePageView:
+          return new TemplatePageView();
+
         default:
           throw new ArgumentException("The page type could not be found.");
       }
@@ -32,6 +35,9 @@ namespace ElogicSystem.View {
       }
       else if (page is ItemPageView) {
         return new PageService(page as ItemPageView);
+      }
+      else if (page is TemplatePageView) {
+        return new PageService(page as TemplatePageView);
       }
       else {
         throw new ArgumentException("object is not a page");

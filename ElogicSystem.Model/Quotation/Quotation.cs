@@ -9,59 +9,46 @@ using System.Threading.Tasks;
 namespace ElogicSystem.Model {
 
   /// <summary>
-  /// Contains information about a qoutation and provides methods to manipulate the quotation.
+  /// Contains information about and provides methods to manipulate a quotation.
   /// </summary>
   public class Quotation {
 
     // PROPERTIES
-    public int ID { get; set; }
+    public int ID { get; private set; }
 
     public string Description { get; set; }
     public DateTime Deadline { get; set; }
     public string Employee { get; set; }
 
-    public double Time {
-      get { return CalculateTime(); }
-    }
+    public double Time { get; set; }
 
     // Prices
-    public double BasePrice {
-      get { return CalculateBasePrice(); }
-    }
+    public double BasePrice { get; set; }
 
     public double ContributionRatio { get; set; } // Max 1
     public double ShippingCost { get; set; }
-    // Price before price adjustment
 
     public double HourPrice { get; set; }
 
-    public double TotalHourPrice {
-      get { return CalculateTotalHourPrice(); }
-    }
+    public double TotalHourPrice { get; set; }
 
-    public double TotalPrice {
-      get { return CalculateTotalPrice(); }
-    }
+    public double TotalPrice { get; set; }
 
     public double PriceDifference { get; set; }
 
     // Price after adjustment
-    public double TotalPriceAdjusted {
-      get { return CalculateTotalPriceAdjusted(); }
-    }
+    public double TotalPriceAdjusted { get; set; }
 
     public double ActualPrice { get; set; }
 
-    public double ActualPriceDeviation {
-      get { return CalculateActualPriceDeviation(); }
-    }
+    public double ActualPriceDeviation { get; set; }
 
-    public Customer Customer { get; set; }
+    public virtual Customer Customer { get; set; }
 
     // Lists
-    public List<IQuantifiable<Panel>> Panels { get; private set; }
+    public virtual List<Panel> Panels { get; private set; }
 
-    public List<QuotationStatus> StatusHistory { get; private set; }
+    public virtual List<QuotationStatus> StatusHistory { get; private set; }
 
     public QuotationStatus CurrentStatus {
       get { return StatusHistory.Last(); }
@@ -74,26 +61,16 @@ namespace ElogicSystem.Model {
     /// </summary>
     /// <param name="quotationStatus">Initial quotation status</param>
     public Quotation(QuotationStatus quotationStatus) {
-      Panels = new List<IQuantifiable<Panel>>();
-
-      StatusHistory = new List<QuotationStatus> {
-        quotationStatus
-      };
-
-      PriceDifference = 0;
+      Panels = new List<Panel>();
+      StatusHistory = new List<QuotationStatus>();
+      StatusHistory.Add(quotationStatus);
     }
 
-    // METHODS
-    private double CalculateBasePrice() => Panels.Select(x => x.Quantity * ((Panel)x).AdjustedPrice).Sum();
-
-    public double CalculateTime() => Panels.Select(x => x.Quantity * ((Panel)x).Time).Sum();
-
-    private double CalculateTotalHourPrice() => Time * HourPrice;
-
-    private double CalculateTotalPrice() => BasePrice * (1 + ContributionRatio) + ShippingCost + TotalHourPrice;
-
-    private double CalculateTotalPriceAdjusted() => TotalPrice + PriceDifference;
-
-    private double CalculateActualPriceDeviation() => ActualPrice - TotalPrice;
+    // Needed for EF to instantiate class.
+    /// <summary>
+    /// Do not use - required by EF to load entity.
+    /// </summary>
+    protected Quotation() { // Cannot be private.
+    }
   }
 }

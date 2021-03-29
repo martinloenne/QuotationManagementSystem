@@ -20,12 +20,12 @@ namespace ElogicSystem.View {
     /// of the requested returned service.</param>
     /// <returns></returns>
     public IWindowService GetWindowService(WindowType windowType) {
-      switch(windowType) {
+      switch (windowType) {
         case WindowType.PanelBuilderView:
           return new WindowService(new PanelBuilderView());
 
-        case WindowType.PanelBuilderCancelDialogView:
-          return new WindowService(new PanelBuilderCancelDialogView());
+        case WindowType.CancelDialogView:
+          return new WindowService(new CancelDialogView());
 
         case WindowType.ConfigureQuotationView:
           return new WindowService(new ConfigureQuotationView());
@@ -38,6 +38,15 @@ namespace ElogicSystem.View {
 
         case WindowType.CreateItemView:
           return new WindowService(new CreateItemView());
+
+        case WindowType.ConfigureItemView:
+          return new WindowService(new ConfigureItemView());
+
+        case WindowType.TemplateAssemblyView:
+          return new WindowService(new TemplateAssemblyView());
+
+        case WindowType.ContainerBuilderView:
+          return new WindowService(new ContainerBuilderView());
 
         default:
           throw new ArgumentException("The window type could not be found.");

@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 
 namespace ElogicSystem.View {
+
   public class PrintableWindowService : IPrintableWindowService {
     private Window _window;
 
@@ -44,6 +45,7 @@ namespace ElogicSystem.View {
       if (_window is PrintQuotationToPDFView) {
         PrintQuotationToPDFView temp = _window as PrintQuotationToPDFView;
         PrintDialog print = new PrintDialog();
+
         if (print.ShowDialog() == true) {
           print.PrintVisual(temp.PrintPDF, "Invoice");
         }

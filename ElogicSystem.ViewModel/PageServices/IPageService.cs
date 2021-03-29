@@ -5,8 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ElogicSystem.ViewModel {
+
   public interface IPageService {
 
-    void SetDataContext(BaseViewModel viewModel);
+    void SetDataContext(IDisposableViewModel viewModel);
   }
 }

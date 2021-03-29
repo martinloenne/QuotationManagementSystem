@@ -8,33 +8,43 @@ using System.Threading.Tasks;
 
 namespace ElogicSystem.ViewModel {
 
-  public class ItemViewModel : BaseNotify, IDataErrorInfo {
-    private Item _itemModel;
+  public abstract class ItemViewModel : BaseNotify, IDataErrorInfo {
+    public Item ItemModel { get; }
+
+    public RelationItem RelationItem { get; set; }
 
     public int ID {
-      get { return _itemModel.ID; }
-      set { _itemModel.ID = value; }
+      get { return ItemModel.ID; }
     }
 
     public string Description {
-      get { return _itemModel.Description; }
-      set { _itemModel.Description = value; }
+      get { return ItemModel.Description; }
+      set { ItemModel.Description = value; }
     }
 
     public double Quantity {
-      get { return _itemModel.Quantity; }
-      set { _itemModel.Quantity = value; }
+      get { return RelationItem.Quantity; }
+      set { RelationItem.Quantity = value; }
     }
-      
+
     public virtual double Price {
-      get { return _itemModel.Price; }
+      get { return ItemModel.Price; }
+      set { ItemModel.Price = value; }
     }
 
     public virtual double Time {
-      get { return _itemModel.Time; }
+      get { return ItemModel.Time; }
+      set { ItemModel.Time = value; }
     }
 
-    public string Error => throw new NotImplementedException();
+    public virtual bool IsContainer { get; set; }
+
+    public bool IsVisible { get; set; }
+
+    public ItemViewModel Parent { get; set; }
+
+    // Not used, but required by interface IDataErrorInfo.
+    public string Error { get; set; }
 
     public string this[string propertyName] {
       get {
@@ -52,8 +62,13 @@ namespace ElogicSystem.ViewModel {
       }
     }
 
+    public ItemViewModel(RelationItem relationItem) {
+      RelationItem = relationItem;
+      ItemModel = RelationItem.Item;
+    }
+
     public ItemViewModel(Item itemModel) {
-      _itemModel = itemModel;
+      ItemModel = itemModel;
     }
 
     public override bool Equals(object obj) {

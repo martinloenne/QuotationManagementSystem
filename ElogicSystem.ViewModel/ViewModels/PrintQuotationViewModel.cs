@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace ElogicSystem.ViewModel {
+
   public class PrintQuotationViewModel : BaseViewModel {
     private IPrintableWindowService _printer;
-    
+
     public QuotationViewModel Quotation { get; set; }
 
     public ICommand PrintPDFCommand { get; set; }

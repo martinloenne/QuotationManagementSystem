@@ -7,6 +7,15 @@ using System.Threading.Tasks;
 namespace ElogicSystem.ViewModel {
 
   public enum WindowType {
-    PanelBuilderView, PanelBuilderCancelDialogView, ConfigureQuotationView, ConfigureCustomerView, PrintQuotationView, CreateItemView
+    PanelBuilderView,
+    CancelDialogView,
+    ConfigureQuotationView,
+    ConfigureCustomerView,
+    PrintQuotationView,
+    CreateItemView,
+    ContainerAssemblyView,
+    ConfigureItemView,
+    TemplateAssemblyView,
+    ContainerBuilderView
   }
 }
